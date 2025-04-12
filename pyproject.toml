@@ -1,0 +1,88 @@
+[project]
+name = "cloudflare-dns-updater"
+version = "0.1.0"
+description = "Small script to automatically update DNS entries in Cloudflare."
+authors = [{name = "TheForgottened"}]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "cloudflare>=4.1.0",
+    "loguru>=0.7.3",
+    "pydantic-settings>=2.8.1",
+    "requests>=2.32.3",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.5",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+indent-width = 4
+fix = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+line-ending = "lf" # change all line endings to UNIX-style
+
+[tool.ruff.lint]
+extend-select = [
+    "N", # pep8-naming
+    "S", # flake8-bandit
+    "B", # flake8-bugbear
+    "PT", # flake8-pytest-style
+    "ANN", # flake8-annotations
+    "C90", # mccabe
+    "DTZ", # flake8-datetimez
+    "INP", # flake8-no-pep420
+    "PIE", # flake8-pie
+    "PTH", # flake8-use-pathlib
+    "SIM", # flake8-simplify
+    "T10", # flake8-debugger
+    "T20", # flake8-print
+    "TRY2", # tryceratops
+    "TRY3", # tryceratops
+    "TRY4", # tryceratops
+    "RUF001", # ruff-specific rules: ambiguous-unicode-character-string
+    "RUF002", # ruff-specific rules: ambiguous-unicode-character-docstring
+    "RUF003", # ruff-specific rules: ambiguous-unicode-character-comment
+    "RUF100", # ruff-specific rules: unused-noqa
+]
+ignore = [
+    "ANN1", # missing type annotation for self/cls in method/classmethod
+    "ANN002", # missing type annotation for *args
+    "ANN003", # missing type annotation for **kwargs
+    "ANN401", # dynamically typed expressions (typing.Any) are disallowed
+    "PT011", # pytest.raises({exception}) is too broad, set the match parameter or use a more specific exception
+    "PT022", # no teardown in fixture {name}, use return instead of yield
+]
+fixable = [
+    "I001", # import block is un-sorted or un-formatted
+]
+dummy-variable-rgx = "^_+$"
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = [
+    "pydantic.field_validator",
+    "pydantic.v1.validator",
+]
+
+[tool.ruff.lint.flake8-annotations]
+suppress-dummy-args = true
+allow-star-arg-any = true
+mypy-init-return = true
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.pylint]
+max-args = 10

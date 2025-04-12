@@ -1,0 +1,74 @@
+branches:
+  - main
+tagFormat: v${version}
+preset: conventionalcommits
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - - "@semantic-release/gitlab"
+    - assets:
+        - path: "dist/**/*"
+          type: "package"
+        - "README.md"
+        - "example-config.env"
+
+analyzeCommits:
+  releaseRules:
+    - type: "feat"
+      release: "minor"
+    - type: "breaking"
+      release: "minor"
+    - message: "*"
+      release: patch
+
+generateNotes:
+  writerOpts:
+    groupBy: "type"
+    commitGroupsSort: "title"
+    commitsSort:
+      - "subject"
+      - "scope"
+  presetConfig:
+    types:
+      - type: "feat"
+        section: "Features"
+        hidden: false
+      - type: "fix"
+        section: "Bug Fixes"
+        hidden: false
+      - type: "perf"
+        section: "Performance Improvements"
+        hidden: false
+      - type: "revert"
+        section: "Reverts"
+        hidden: false
+      - type: "docs"
+        section: "Documentation"
+        hidden: false
+      - type: "style"
+        section: "Styles"
+        hidden: false
+      - type: "chore"
+        section: "Miscellaneous Chores"
+        hidden: false
+      - type: "refactor"
+        section: "Code Refactoring"
+        hidden: false
+      - type: "test"
+        section: "Tests"
+        hidden: false
+      - type: "build"
+        section: "Build System"
+        hidden: false
+      - type: "ci"
+        section: "Continuous Integration"
+        hidden: false
+      - type: "cd"
+        section: "Continuous Development"
+        hidden: false
+      - type: "cicd"
+        section: "Continuous Integration / Continuous Development"
+        hidden: false
+      - type: ""
+        section: "Other"
+        hidden: false

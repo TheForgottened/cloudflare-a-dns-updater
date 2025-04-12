@@ -1,0 +1,24 @@
+name: create-release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts
+      - run: apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
+      - run: >-
+          npm install -g
+          semantic-release@24.0.0
+          @semantic-release/commit-analyzer@13.0.0
+          @semantic-release/release-notes-generator@14.0.1
+          @semantic-release/gitlab@13.2.0
+          conventional-changelog-conventionalcommits@8.0.0
+      - run: semantic-release

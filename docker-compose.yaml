@@ -1,0 +1,6 @@
+services:
+  cloudflare-a-dns-updater:
+    build:
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ".env"
