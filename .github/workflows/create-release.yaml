@@ -22,3 +22,6 @@ jobs:
           @semantic-release/gitlab@13.2.0
           conventional-changelog-conventionalcommits@8.0.0
       - run: semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
