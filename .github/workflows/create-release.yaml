@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - run: apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends git-core ca-certificates
       - run: >-
           npm install -g
           semantic-release@24.0.0
