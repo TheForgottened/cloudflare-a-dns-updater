@@ -1,11 +1,11 @@
 import os
 import sys
-from datetime import datetime, UTC
-from typing import Generator, TYPE_CHECKING
+from datetime import UTC, datetime
+from typing import TYPE_CHECKING, Generator
 from uuid import uuid4
 
 import requests
-from cloudflare import Cloudflare, NOT_GIVEN
+from cloudflare import NOT_GIVEN, Cloudflare
 from cloudflare.types.dns import RecordResponse
 from cloudflare.types.zones import Zone
 from loguru import logger
@@ -81,7 +81,7 @@ def main():
 
 
 def _configure_loguru() -> None:
-    def _custom_format(record: "Record"):
+    def _custom_format(record: "Record") -> str:
         record["extra"] |= {"relpath": f"{record['name'].replace('.', os.sep)}.py"}
         return "[{time}][LEVEL={level}][FILE={extra[relpath]}:{line}][TRACE={extra[trace_id]}] {message}\n{exception}"
 
