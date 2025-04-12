@@ -22,7 +22,7 @@ def get_public_ipv4_address() -> str:
     old_has_ipv6 = requests.packages.urllib3.util.connection.HAS_IPV6
 
     requests.packages.urllib3.util.connection.HAS_IPV6 = False
-    resp = requests.get("https://checkip.amazonaws.com")
+    resp = requests.get(url="https://checkip.amazonaws.com", timeout=120)
     requests.packages.urllib3.util.connection.HAS_IPV6 = old_has_ipv6
 
     return resp.text.strip()
@@ -47,7 +47,7 @@ def a_dns_record_generator(cf_client: Cloudflare, zone_name: str) -> Generator[t
         )
 
 
-def main():
+def main() -> None:
     env_config = get_env_config()
     ipv4_address = get_public_ipv4_address()
     client = Cloudflare(api_token=env_config.api_token.get_secret_value())
