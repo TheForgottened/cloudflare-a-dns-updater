@@ -5,12 +5,12 @@ preset: conventionalcommits
 plugins:
   - "@semantic-release/commit-analyzer"
   - "@semantic-release/release-notes-generator"
-  - - "@semantic-release/gitlab"
+  - - "@semantic-release/github"
     - assets:
-        - path: "dist/**/*"
-          type: "package"
-        - "README.md"
-        - "example-config.env"
+        - path: "README.md"
+          label: "README"
+        - path: ".env.example"
+          label: "Example .env file"
 
 analyzeCommits:
   releaseRules:
